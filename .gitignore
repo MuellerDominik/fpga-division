@@ -1,0 +1,9 @@
+# GHDL
+*.o
+*.cf
+
+# Questa
+work/
+*.ini
+*.vstf
+*.wlf

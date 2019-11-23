@@ -214,3 +214,9 @@ The performance of the algorithms is measured in termns of area, timing, through
 
 **M**: Iterations per Cycle <br>
 **a**, **b**, **c**, **d**, **u**, **v**, **w**, **x**: TBD
+
+## License
+
+Copyright &copy; 2019 Dominik Müller and Nico Canzani
+
+This project is licensed under the terms of the Apache License 2.0 - see the [LICENSE](LICENSE "LICENSE") file for details

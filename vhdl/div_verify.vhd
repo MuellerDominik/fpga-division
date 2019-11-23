@@ -41,13 +41,15 @@ begin
 
     -- Stimuli
     p_stim : process
-      file input_file       : text open read_mode is "./stim/div_stimuli.txt";
+      file input_file       : text;
       variable v_input_line : line;
       variable v_num        : unsigned(N-1 downto 0);
       variable v_den        : unsigned(N-1 downto 0);
       variable v_quo        : unsigned(N-1 downto 0);
       variable v_rmn        : unsigned(N-1 downto 0);
     begin
+
+      file_open(input_file, "../stim/div_stimuli_10bit.txt", read_mode);
 
       start  <= '0';
       num <= (others => '0');
@@ -80,6 +82,8 @@ begin
 
         wait until falling_edge(clk);
       end loop l_stim;
+
+      file_close(input_file);
 
       report "simulation done" severity note;
       sim_end <= true;

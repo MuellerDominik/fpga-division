@@ -2,7 +2,7 @@
 -- repeated-subtraction (iterative)
 -- 
 -- returns quo and rmn after a max. of 2^N clock cycles
--- if den=0, returns quo=0 and rmn=0 after one clock cycle
+-- if den=0, returns quo=(2**N - 1) and rmn=(2**N - 1) after one clock cycle
 ------------------------------------------------------------------------------
 
 library ieee;
@@ -36,21 +36,25 @@ architecture rtl of div is
 
   -- one iteration of the repeated-subtraction
   function f_div (
-    div_arg : t_div
+    div_parm : t_div
   ) return t_div is
     variable res : t_div;
   begin
-    res := div_arg;
+    res := div_parm;
 
-    if (res.num >= res.den and res.den /= to_unsigned(0, N)) then
+    -- if den=0, directly return quo=(2**N - 1) and rmn=(2**N - 1)
+    if (res.den = to_unsigned(0, N)) then
+      res.quo := (others => '1');
+      res.num := (others => '1');
+      res.done := '1';
+      return res;
+    end if;
+
+    if (res.num >= res.den) then
       res.num := res.num - res.den;
       res.quo := res.quo + 1;
     else
       res.done := '1';
-    end if;
-
-    if (res.den = to_unsigned(0, N)) then
-      res.num := (others => '0');
     end if;
 
     return res;

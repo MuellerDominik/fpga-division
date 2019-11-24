@@ -49,7 +49,7 @@ begin
       variable v_rmn        : unsigned(N-1 downto 0);
     begin
 
-      file_open(input_file, "./stim/div_stimuli_10bit.txt", read_mode);
+      file_open(input_file, "./stim/div_stimuli_" & to_string(N) & "bit.txt", read_mode);
 
       start  <= '0';
       num <= (others => '0');

@@ -2,7 +2,7 @@
 -- srt division (iterative)
 -- 
 -- returns quo and rmn after N clock cycles
--- if den=0, returns quo=0 and rmn=0 after one clock cycle
+-- if den=0, returns quo=(2**N - 1) and rmn=(2**N - 1) after one clock cycle
 ------------------------------------------------------------------------------
 
 library ieee;
@@ -77,8 +77,10 @@ architecture rtl of div is
   begin
     res := div_parm;
 
-    -- if den=0, directly return quo=0 and rmn=0
+    -- if den=0, directly return quo=(2**N - 1) and rmn=(2**N - 1)
     if (res.den = to_unsigned(0, N)) then
+      res.quo := (others => '1');
+      res.rmn := (others => '1');
       res.done := '1';
       return res;
     end if;
